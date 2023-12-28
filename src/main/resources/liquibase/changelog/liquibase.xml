@@ -1,0 +1,95 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="1703746873251-1" author="Armin Ghavidel">
+        <createTable tableName="provider">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_provider"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+            <column name="version" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1703746873251-2" author="Armin Ghavidel">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_user"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+            <column name="version" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1703746873251-3" author="Armin Ghavidel">
+        <createTable tableName="product">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_product"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+            <column name="version" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="provider_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="is_rating_enabled" type="boolean"/>
+            <column name="is_commenting_enabled" type="boolean"/>
+            <column name="only_buyers_can_review" type="boolean"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1703746873251-4" author="Armin Ghavidel">
+        <addForeignKeyConstraint baseColumnNames="provider_id" baseTableName="product"
+                                 constraintName="fk_product_provider" deferrable="false" initiallyDeferred="false"
+                                 referencedColumnNames="id" referencedTableName="provider" validate="true" />
+    </changeSet>
+
+    <changeSet id="1703746873251-5" author="Armin Ghavidel">
+        <createTable tableName="review">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_review"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+            <column name="version" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comment" type="varchar(2000)"/>
+            <column name="rating" type="float"/>
+            <column name="is_approved" type="boolean"/>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1703746873251-6" author="Armin Ghavidel">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="review"
+                                 constraintName="fk_review_product" deferrable="false" initiallyDeferred="false"
+                                 referencedColumnNames="id" referencedTableName="product" validate="true" />
+    </changeSet>
+
+    <changeSet id="1703746873251-7" author="Armin Ghavidel">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="review"
+                                 constraintName="fk_user_product" deferrable="false" initiallyDeferred="false"
+                                 referencedColumnNames="id" referencedTableName="product" validate="true" />
+    </changeSet>
+
+</databaseChangeLog>
