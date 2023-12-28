@@ -4,6 +4,7 @@ import com.github.fictionaldollop.controller.dto.AddReviewRequest;
 import com.github.fictionaldollop.controller.dto.ProductDto;
 import com.github.fictionaldollop.controller.dto.ProductReviewDto;
 import com.github.fictionaldollop.domain.Product;
+import com.github.fictionaldollop.domain.Review;
 import com.github.fictionaldollop.domain.User;
 import com.github.fictionaldollop.repository.ProductRepository;
 import com.github.fictionaldollop.service.exception.FictionalBadRequestException;
@@ -61,5 +62,17 @@ public class ProductService {
 
         if (product.isOnlyBuyersCanReview() && !product.getBuyers().contains(user))
             throw new FictionalBadRequestException("Review not allowed for this user!");
+    }
+
+    public void updateProductRating(Review review) {
+        var product = review.getProduct();
+        var lastRatingSum = product.getAverageRating() * product.getReviewCount();
+        var newRatingSum = lastRatingSum + review.getRating();
+        long newReviewCount = product.getReviewCount() + 1;
+        var newAverageRating = newRatingSum / (newReviewCount);
+
+        product.setAverageRating(newAverageRating);
+        product.setReviewCount(newReviewCount);
+        productRepository.save(product);
     }
 }

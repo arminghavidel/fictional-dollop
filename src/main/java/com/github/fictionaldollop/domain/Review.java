@@ -15,7 +15,7 @@ public class Review extends BaseEntity{
     @Column(name = "is_approved")
     private Boolean isApproved;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
