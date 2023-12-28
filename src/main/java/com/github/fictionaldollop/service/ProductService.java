@@ -11,7 +11,6 @@ import com.github.fictionaldollop.service.exception.FictionalNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductService {
@@ -54,13 +53,13 @@ public class ProductService {
     }
 
     private void validateRequest(Product product, User user, AddReviewRequest request) {
-        if (!product.getRatingEnabled() && request.getRating() != null)
+        if (!product.isRatingEnabled() && request.getRating() != null)
             throw new FictionalBadRequestException("Rating is not allowed for this product!");
 
-        if (!product.getCommentingEnabled() && request.getComment() != null)
+        if (!product.isCommentingEnabled() && request.getComment() != null)
             throw new FictionalBadRequestException("Commenting is not allowed for this product!");
 
-        if (product.getOnlyBuyersCanReview() && !product.getBuyers().contains(user))
+        if (product.isOnlyBuyersCanReview() && !product.getBuyers().contains(user))
             throw new FictionalBadRequestException("Review not allowed for this user!");
     }
 }

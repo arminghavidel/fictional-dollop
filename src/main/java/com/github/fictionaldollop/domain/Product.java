@@ -19,13 +19,13 @@ public class Product extends BaseEntity{
     private Provider provider;
 
     @Column(name = "is_rating_enabled")
-    private Boolean isRatingEnabled;
+    private boolean isRatingEnabled;
 
     @Column(name = "is_commenting_enabled")
-    private Boolean isCommentingEnabled;
+    private boolean isCommentingEnabled;
 
     @Column(name = "only_buyers_can_review")
-    private Boolean onlyBuyersCanReview;
+    private boolean onlyBuyersCanReview;
 
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
@@ -68,27 +68,27 @@ public class Product extends BaseEntity{
         this.provider = provider;
     }
 
-    public Boolean getRatingEnabled() {
+    public boolean isRatingEnabled() {
         return isRatingEnabled;
     }
 
-    public void setRatingEnabled(Boolean ratingEnabled) {
+    public void setRatingEnabled(boolean ratingEnabled) {
         isRatingEnabled = ratingEnabled;
     }
 
-    public Boolean getCommentingEnabled() {
+    public boolean isCommentingEnabled() {
         return isCommentingEnabled;
     }
 
-    public void setCommentingEnabled(Boolean commentingEnabled) {
+    public void setCommentingEnabled(boolean commentingEnabled) {
         isCommentingEnabled = commentingEnabled;
     }
 
-    public Boolean getOnlyBuyersCanReview() {
+    public boolean isOnlyBuyersCanReview() {
         return onlyBuyersCanReview;
     }
 
-    public void setOnlyBuyersCanReview(Boolean onlyBuyersCanReview) {
+    public void setOnlyBuyersCanReview(boolean onlyBuyersCanReview) {
         this.onlyBuyersCanReview = onlyBuyersCanReview;
     }
 

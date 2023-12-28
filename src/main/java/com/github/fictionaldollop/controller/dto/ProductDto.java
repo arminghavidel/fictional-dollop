@@ -10,9 +10,9 @@ public class ProductDto {
     private String name;
     private String description;
     private ProviderDto provider;
-    private Boolean isRatingEnabled;
-    private Boolean isCommentingEnabled;
-    private Boolean onlyBuyersCanReview;
+    private boolean isRatingEnabled;
+    private boolean isCommentingEnabled;
+    private boolean onlyBuyersCanReview;
     private List<ProductReviewDto> reviews;
     private Long reviewCount;
     private Float averageRating;
@@ -49,27 +49,27 @@ public class ProductDto {
         this.provider = provider;
     }
 
-    public Boolean getRatingEnabled() {
+    public boolean isRatingEnabled() {
         return isRatingEnabled;
     }
 
-    public void setRatingEnabled(Boolean ratingEnabled) {
+    public void setRatingEnabled(boolean ratingEnabled) {
         isRatingEnabled = ratingEnabled;
     }
 
-    public Boolean getCommentingEnabled() {
+    public boolean isCommentingEnabled() {
         return isCommentingEnabled;
     }
 
-    public void setCommentingEnabled(Boolean commentingEnabled) {
+    public void setCommentingEnabled(boolean commentingEnabled) {
         isCommentingEnabled = commentingEnabled;
     }
 
-    public Boolean getOnlyBuyersCanReview() {
+    public boolean isOnlyBuyersCanReview() {
         return onlyBuyersCanReview;
     }
 
-    public void setOnlyBuyersCanReview(Boolean onlyBuyersCanReview) {
+    public void setOnlyBuyersCanReview(boolean onlyBuyersCanReview) {
         this.onlyBuyersCanReview = onlyBuyersCanReview;
     }
 
@@ -97,15 +97,15 @@ public class ProductDto {
         this.averageRating = averageRating;
     }
 
-    public static ProductDto map(Product product){
+    public static ProductDto map(Product product) {
         var productDto = new ProductDto();
         productDto.setId(product.getId());
         productDto.setName(product.getName());
         productDto.setDescription(product.getDescription());
         productDto.setProvider(ProviderDto.map(product.getProvider()));
-        productDto.setRatingEnabled(product.getRatingEnabled());
-        productDto.setCommentingEnabled(product.getCommentingEnabled());
-        productDto.setOnlyBuyersCanReview(product.getOnlyBuyersCanReview());
+        productDto.setRatingEnabled(product.isRatingEnabled());
+        productDto.setCommentingEnabled(product.isCommentingEnabled());
+        productDto.setOnlyBuyersCanReview(product.isOnlyBuyersCanReview());
         productDto.setReviewCount(product.getReviewCount());
         productDto.setAverageRating(product.getAverageRating());
         return productDto;
