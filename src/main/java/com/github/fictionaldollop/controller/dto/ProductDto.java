@@ -1,40 +1,29 @@
-package com.github.fictionaldollop.domain;
+package com.github.fictionaldollop.controller.dto;
 
-import jakarta.persistence.*;
+import com.github.fictionaldollop.domain.Product;
 
 import java.util.List;
 
-@Entity
-@Table(name = "product")
-public class Product extends BaseEntity{
+public class ProductDto {
 
-    @Column(name = "name")
+    private Long id;
     private String name;
-
-    @Column(name = "description")
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "provider_id")
-    private Provider provider;
-
-    @Column(name = "is_rating_enabled")
+    private ProviderDto provider;
     private Boolean isRatingEnabled;
-
-    @Column(name = "is_commenting_enabled")
     private Boolean isCommentingEnabled;
-
-    @Column(name = "only_buyers_can_review")
     private Boolean onlyBuyersCanReview;
-
-    @OneToMany(mappedBy = "product")
-    private List<Review> reviews;
-
-    @Column(name = "review_count")
+    private List<ProductReviewDto> reviews;
     private Long reviewCount;
-
-    @Column(name = "average_rating")
     private Float averageRating;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -52,11 +41,11 @@ public class Product extends BaseEntity{
         this.description = description;
     }
 
-    public Provider getProvider() {
+    public ProviderDto getProvider() {
         return provider;
     }
 
-    public void setProvider(Provider provider) {
+    public void setProvider(ProviderDto provider) {
         this.provider = provider;
     }
 
@@ -84,11 +73,11 @@ public class Product extends BaseEntity{
         this.onlyBuyersCanReview = onlyBuyersCanReview;
     }
 
-    public List<Review> getReviews() {
+    public List<ProductReviewDto> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
+    public void setReviews(List<ProductReviewDto> reviews) {
         this.reviews = reviews;
     }
 
@@ -106,5 +95,19 @@ public class Product extends BaseEntity{
 
     public void setAverageRating(Float averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public static ProductDto map(Product product){
+        var productDto = new ProductDto();
+        productDto.setId(product.getId());
+        productDto.setName(product.getName());
+        productDto.setDescription(product.getDescription());
+        productDto.setProvider(ProviderDto.map(product.getProvider()));
+        productDto.setRatingEnabled(product.isRatingEnabled());
+        productDto.setCommentingEnabled(product.isCommentingEnabled());
+        productDto.setOnlyBuyersCanReview(product.isOnlyBuyersCanReview());
+        productDto.setReviewCount(product.getReviewCount());
+        productDto.setAverageRating(product.getAverageRating());
+        return productDto;
     }
 }
