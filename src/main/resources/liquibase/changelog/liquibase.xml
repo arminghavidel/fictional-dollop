@@ -44,7 +44,7 @@
             <column name="name" type="varchar(255)"/>
             <column name="description" type="varchar(255)"/>
             <column name="provider_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="is_rating_enabled" type="boolean"/>
             <column name="is_commenting_enabled" type="boolean"/>
@@ -55,7 +55,7 @@
     <changeSet id="1703746873251-4" author="Armin Ghavidel">
         <addForeignKeyConstraint baseColumnNames="provider_id" baseTableName="product"
                                  constraintName="fk_product_provider" deferrable="false" initiallyDeferred="false"
-                                 referencedColumnNames="id" referencedTableName="provider" validate="true" />
+                                 referencedColumnNames="id" referencedTableName="provider" validate="true"/>
     </changeSet>
 
     <changeSet id="1703746873251-5" author="Armin Ghavidel">
@@ -72,10 +72,10 @@
             <column name="rating" type="float"/>
             <column name="is_approved" type="boolean"/>
             <column name="product_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="user_id" type="bigint">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
@@ -83,13 +83,13 @@
     <changeSet id="1703746873251-6" author="Armin Ghavidel">
         <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="review"
                                  constraintName="fk_review_product" deferrable="false" initiallyDeferred="false"
-                                 referencedColumnNames="id" referencedTableName="product" validate="true" />
+                                 referencedColumnNames="id" referencedTableName="product" validate="true"/>
     </changeSet>
 
     <changeSet id="1703746873251-7" author="Armin Ghavidel">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="review"
                                  constraintName="fk_review_user" deferrable="false" initiallyDeferred="false"
-                                 referencedColumnNames="id" referencedTableName="user" validate="true" />
+                                 referencedColumnNames="id" referencedTableName="user" validate="true"/>
     </changeSet>
 
     <changeSet id="1703752634011-1" author="Armin Ghavidel">
@@ -101,4 +101,17 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="1703767724757-1" author="Armin Ghavidel">
+        <createTable tableName="product_buyers">
+            <column name="product_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_product_user_product"
+                             referencedTableName="product" referencedColumnNames="id"/>
+            </column>
+
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_product_user_user"
+                             referencedTableName="user" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

@@ -49,7 +49,7 @@ public class ProductDto {
         this.provider = provider;
     }
 
-    public Boolean isRatingEnabled() {
+    public Boolean getRatingEnabled() {
         return isRatingEnabled;
     }
 
@@ -57,7 +57,7 @@ public class ProductDto {
         isRatingEnabled = ratingEnabled;
     }
 
-    public Boolean isCommentingEnabled() {
+    public Boolean getCommentingEnabled() {
         return isCommentingEnabled;
     }
 
@@ -65,7 +65,7 @@ public class ProductDto {
         isCommentingEnabled = commentingEnabled;
     }
 
-    public Boolean isOnlyBuyersCanReview() {
+    public Boolean getOnlyBuyersCanReview() {
         return onlyBuyersCanReview;
     }
 
@@ -103,9 +103,9 @@ public class ProductDto {
         productDto.setName(product.getName());
         productDto.setDescription(product.getDescription());
         productDto.setProvider(ProviderDto.map(product.getProvider()));
-        productDto.setRatingEnabled(product.isRatingEnabled());
-        productDto.setCommentingEnabled(product.isCommentingEnabled());
-        productDto.setOnlyBuyersCanReview(product.isOnlyBuyersCanReview());
+        productDto.setRatingEnabled(product.getRatingEnabled());
+        productDto.setCommentingEnabled(product.getCommentingEnabled());
+        productDto.setOnlyBuyersCanReview(product.getOnlyBuyersCanReview());
         productDto.setReviewCount(product.getReviewCount());
         productDto.setAverageRating(product.getAverageRating());
         return productDto;

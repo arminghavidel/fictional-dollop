@@ -36,6 +36,14 @@ public class Product extends BaseEntity{
     @Column(name = "average_rating")
     private Float averageRating;
 
+    @ManyToMany
+    @JoinTable(
+            name = "product_buyers",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> buyers;
+
     public String getName() {
         return name;
     }
@@ -60,7 +68,7 @@ public class Product extends BaseEntity{
         this.provider = provider;
     }
 
-    public Boolean isRatingEnabled() {
+    public Boolean getRatingEnabled() {
         return isRatingEnabled;
     }
 
@@ -68,7 +76,7 @@ public class Product extends BaseEntity{
         isRatingEnabled = ratingEnabled;
     }
 
-    public Boolean isCommentingEnabled() {
+    public Boolean getCommentingEnabled() {
         return isCommentingEnabled;
     }
 
@@ -76,7 +84,7 @@ public class Product extends BaseEntity{
         isCommentingEnabled = commentingEnabled;
     }
 
-    public Boolean isOnlyBuyersCanReview() {
+    public Boolean getOnlyBuyersCanReview() {
         return onlyBuyersCanReview;
     }
 
@@ -106,5 +114,13 @@ public class Product extends BaseEntity{
 
     public void setAverageRating(Float averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public List<User> getBuyers() {
+        return buyers;
+    }
+
+    public void setBuyers(List<User> buyers) {
+        this.buyers = buyers;
     }
 }

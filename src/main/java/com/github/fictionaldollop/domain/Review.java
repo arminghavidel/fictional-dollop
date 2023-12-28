@@ -39,7 +39,7 @@ public class Review extends BaseEntity{
         this.rating = rating;
     }
 
-    public Boolean isApproved() {
+    public Boolean getApproved() {
         return isApproved;
     }
 
@@ -61,5 +61,52 @@ public class Review extends BaseEntity{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public static ReviewBuilder builder(){
+        return new ReviewBuilder();
+    }
+
+    public static class ReviewBuilder{
+        private String comment;
+        private Float rating;
+        private Boolean isApproved;
+        private Product product;
+        private User user;
+
+        public ReviewBuilder comment(String comment){
+            this.comment = comment;
+            return this;
+        }
+
+        public ReviewBuilder rating(Float rating){
+            this.rating = rating;
+            return this;
+        }
+
+        public ReviewBuilder isApproved(Boolean isApproved){
+            this.isApproved = isApproved;
+            return this;
+        }
+
+        public ReviewBuilder product(Product product){
+            this.product = product;
+            return this;
+        }
+
+        public ReviewBuilder user(User user){
+            this.user = user;
+            return this;
+        }
+
+        public Review build(){
+            var review = new Review();
+            review.setComment(this.comment);
+            review.setRating(this.rating);
+            review.setApproved(this.isApproved);
+            review.setProduct(this.product);
+            review.setUser(this.user);
+            return review;
+        }
     }
 }

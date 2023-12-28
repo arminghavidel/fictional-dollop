@@ -1,12 +1,13 @@
 package com.github.fictionaldollop.controller;
 
+import com.github.fictionaldollop.controller.dto.AddReviewRequest;
 import com.github.fictionaldollop.controller.dto.ProductDto;
 import com.github.fictionaldollop.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -20,7 +21,21 @@ public class ProductController {
     }
 
     @GetMapping
-    public Page<ProductDto> products(Pageable pageable){
-        return productService.products(pageable);
+    public ResponseEntity<Page<ProductDto>> products(Pageable pageable) {
+        return ResponseEntity.ok(productService.products(pageable));
+    }
+
+    /**
+     * TODO: Replace the 'user_id' retrieval from header with user information
+     *       obtained from Spring Security's UserDetails after implementing authentication.
+     */
+    @PostMapping("/{productId}/review")
+    public ResponseEntity<Void> addReview(
+            @RequestHeader("user_id") Long userId,
+            @PathVariable Long productId,
+            @RequestBody AddReviewRequest request
+    ){
+        productService.addReview(userId, productId, request);
+        return ResponseEntity.ok().build();
     }
 }

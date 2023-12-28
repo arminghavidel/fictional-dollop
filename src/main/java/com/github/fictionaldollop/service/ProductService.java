@@ -1,20 +1,27 @@
 package com.github.fictionaldollop.service;
 
+import com.github.fictionaldollop.controller.dto.AddReviewRequest;
 import com.github.fictionaldollop.controller.dto.ProductDto;
 import com.github.fictionaldollop.controller.dto.ProductReviewDto;
 import com.github.fictionaldollop.domain.Product;
+import com.github.fictionaldollop.domain.User;
 import com.github.fictionaldollop.repository.ProductRepository;
+import com.github.fictionaldollop.service.exception.FictionalBadRequestException;
+import com.github.fictionaldollop.service.exception.FictionalNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductService {
 
+    private final UserService userService;
     private final ReviewService reviewService;
     private final ProductRepository productRepository;
 
-    public ProductService(ReviewService reviewService, ProductRepository productRepository) {
+    public ProductService(UserService userService, ReviewService reviewService, ProductRepository productRepository) {
+        this.userService = userService;
         this.reviewService = reviewService;
         this.productRepository = productRepository;
     }
@@ -32,5 +39,28 @@ public class ProductService {
                 .toList();
         productDto.setReviews(lastThreeReviews);
         return productDto;
+    }
+
+    public void addReview(Long userId, Long productId, AddReviewRequest request) {
+        var user = userService.findUserById(userId);
+        var product = findProductById(productId);
+        validateRequest(product, user, request);
+        reviewService.createReview(user, product, request);
+    }
+
+    private Product findProductById(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new FictionalNotFoundException("Product not found!"));
+    }
+
+    private void validateRequest(Product product, User user, AddReviewRequest request) {
+        if (!product.getRatingEnabled() && request.getRating() != null)
+            throw new FictionalBadRequestException("Rating is not allowed for this product!");
+
+        if (!product.getCommentingEnabled() && request.getComment() != null)
+            throw new FictionalBadRequestException("Commenting is not allowed for this product!");
+
+        if (product.getOnlyBuyersCanReview() && !product.getBuyers().contains(user))
+            throw new FictionalBadRequestException("Review not allowed for this user!");
     }
 }
