@@ -3,6 +3,7 @@ package com.github.fictionaldollop.controller;
 import com.github.fictionaldollop.controller.dto.AddReviewRequest;
 import com.github.fictionaldollop.controller.dto.ProductDto;
 import com.github.fictionaldollop.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class ProductController {
     public ResponseEntity<Void> addReview(
             @RequestHeader("user_id") Long userId,
             @PathVariable Long productId,
-            @RequestBody AddReviewRequest request
+            @Valid @RequestBody AddReviewRequest request
     ) {
         productService.addReview(userId, productId, request);
         return ResponseEntity.ok().build();

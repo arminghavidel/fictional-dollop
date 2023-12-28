@@ -1,8 +1,12 @@
 package com.github.fictionaldollop.controller.dto;
 
+import jakarta.validation.constraints.Positive;
+
 public class AddReviewRequest {
 
     private String comment;
+
+    @Positive
     private Float rating;
 
     public String getComment() {

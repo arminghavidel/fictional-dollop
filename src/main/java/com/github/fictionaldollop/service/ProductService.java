@@ -66,10 +66,14 @@ public class ProductService {
 
     public void updateProductRating(Review review) {
         var product = review.getProduct();
-        var lastRatingSum = product.getAverageRating() * product.getReviewCount();
-        var newRatingSum = lastRatingSum + review.getRating();
-        long newReviewCount = product.getReviewCount() + 1;
-        var newAverageRating = newRatingSum / (newReviewCount);
+
+        float lastAverageRating = product.getAverageRating() != null ? product.getAverageRating() : 0f;
+        long lastReviewCount = product.getReviewCount() != null ? product.getReviewCount() : 0;
+
+        float newRatingSum = (lastAverageRating * lastReviewCount) + review.getRating();
+        long newReviewCount = lastReviewCount + 1;
+
+        float newAverageRating = newRatingSum / newReviewCount;
 
         product.setAverageRating(newAverageRating);
         product.setReviewCount(newReviewCount);
