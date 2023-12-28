@@ -10,12 +10,12 @@ public class Review extends BaseEntity{
     private String comment;
 
     @Column(name = "rating")
-    private float rating;
+    private Float rating;
 
     @Column(name = "is_approved")
-    private boolean isApproved;
+    private Boolean isApproved;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -31,19 +31,19 @@ public class Review extends BaseEntity{
         this.comment = comment;
     }
 
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
-    public boolean isApproved() {
+    public Boolean isApproved() {
         return isApproved;
     }
 
-    public void setApproved(boolean approved) {
+    public void setApproved(Boolean approved) {
         isApproved = approved;
     }
 

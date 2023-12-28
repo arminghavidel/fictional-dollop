@@ -88,8 +88,17 @@
 
     <changeSet id="1703746873251-7" author="Armin Ghavidel">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="review"
-                                 constraintName="fk_user_product" deferrable="false" initiallyDeferred="false"
-                                 referencedColumnNames="id" referencedTableName="product" validate="true" />
+                                 constraintName="fk_review_user" deferrable="false" initiallyDeferred="false"
+                                 referencedColumnNames="id" referencedTableName="user" validate="true" />
+    </changeSet>
+
+    <changeSet id="1703752634011-1" author="Armin Ghavidel">
+        <addColumn tableName="product">
+            <column name="review_count" type="bigint"/>
+        </addColumn>
+        <addColumn tableName="product">
+            <column name="average_rating" type="float"/>
+        </addColumn>
     </changeSet>
 
 </databaseChangeLog>
