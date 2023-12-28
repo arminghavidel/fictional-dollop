@@ -1,0 +1,415 @@
+{
+	"info": {
+		"_postman_id": "8b99797f-92b9-4bbb-90b4-fbc8727b2a70",
+		"name": "fictional-dollop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25530497"
+	},
+	"item": [
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8383/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8383/product",
+									"host": [
+										"localhost"
+									],
+									"port": "8383",
+									"path": [
+										"product"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Dec 2023 14:26:08 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"id\": 1,\n            \"name\": \"Product One\",\n            \"description\": \"This is a product.\",\n            \"provider\": {\n                \"id\": 1,\n                \"name\": \"Provider One\"\n            },\n            \"onlyBuyersCanReview\": false,\n            \"reviews\": [\n                {\n                    \"id\": 5,\n                    \"comment\": \"Could be better, but worth the price.\",\n                    \"rating\": 2,\n                    \"user\": {\n                        \"id\": 5,\n                        \"username\": \"userfive\"\n                    }\n                },\n                {\n                    \"id\": 4,\n                    \"comment\": \"Not what I expected, but okay\",\n                    \"rating\": 3,\n                    \"user\": {\n                        \"id\": 4,\n                        \"username\": \"userfour\"\n                    }\n                },\n                {\n                    \"id\": 3,\n                    \"comment\": \"Great product, highly recommended!\",\n                    \"rating\": 4,\n                    \"user\": {\n                        \"id\": 3,\n                        \"username\": \"userthree\"\n                    }\n                }\n            ],\n            \"reviewCount\": 5,\n            \"averageRating\": 3.8,\n            \"commentingEnabled\": true,\n            \"ratingEnabled\": true\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Product Two\",\n            \"description\": \"This is a product.\",\n            \"provider\": {\n                \"id\": 1,\n                \"name\": \"Provider One\"\n            },\n            \"onlyBuyersCanReview\": false,\n            \"reviews\": [\n                {\n                    \"id\": 7,\n                    \"comment\": null,\n                    \"rating\": 2,\n                    \"user\": {\n                        \"id\": 7,\n                        \"username\": \"userseven\"\n                    }\n                },\n                {\n                    \"id\": 6,\n                    \"comment\": null,\n                    \"rating\": 4,\n                    \"user\": {\n                        \"id\": 6,\n                        \"username\": \"usersix\"\n                    }\n                }\n            ],\n            \"reviewCount\": 2,\n            \"averageRating\": 3,\n            \"commentingEnabled\": false,\n            \"ratingEnabled\": true\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Product Three\",\n            \"description\": \"This is a product.\",\n            \"provider\": {\n                \"id\": 1,\n                \"name\": \"Provider One\"\n            },\n            \"onlyBuyersCanReview\": true,\n            \"reviews\": [\n                {\n                    \"id\": 10,\n                    \"comment\": \"Highly recommended for anyone looking for reliability and efficiency.\",\n                    \"rating\": 4,\n                    \"user\": {\n                        \"id\": 3,\n                        \"username\": \"userthree\"\n                    }\n                }\n            ],\n            \"reviewCount\": 1,\n            \"averageRating\": 4,\n            \"commentingEnabled\": true,\n            \"ratingEnabled\": true\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Product Four\",\n            \"description\": \"This is a product.\",\n            \"provider\": {\n                \"id\": 2,\n                \"name\": \"Provider Two\"\n            },\n            \"onlyBuyersCanReview\": true,\n            \"reviews\": [],\n            \"reviewCount\": null,\n            \"averageRating\": null,\n            \"commentingEnabled\": false,\n            \"ratingEnabled\": true\n        }\n    ],\n    \"pageable\": {\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 4,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 4,\n    \"empty\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "add review",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"Highly recommended for anyone looking for reliability and efficiency.\",\r\n    \"rating\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8383/product/:productId/review",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"product",
+								":productId",
+								"review"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "user_id",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\": \"Highly recommended for anyone looking for reliability and efficiency.\",\r\n    \"rating\": 4\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8383/product/:productId/review",
+									"host": [
+										"localhost"
+									],
+									"port": "8383",
+									"path": [
+										"product",
+										":productId",
+										"review"
+									],
+									"variable": [
+										{
+											"key": "productId",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Dec 2023 14:26:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "review",
+			"item": [
+				{
+					"name": "reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8383/review?isApproved=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"review"
+							],
+							"query": [
+								{
+									"key": "isApproved",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8383/review?isApproved=true",
+									"host": [
+										"localhost"
+									],
+									"port": "8383",
+									"path": [
+										"review"
+									],
+									"query": [
+										{
+											"key": "isApproved",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Dec 2023 14:26:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"id\": 10,\n            \"comment\": \"Highly recommended for anyone looking for reliability and efficiency.\",\n            \"rating\": 4,\n            \"product\": {\n                \"id\": 3,\n                \"name\": \"Product Three\"\n            },\n            \"user\": {\n                \"id\": 3,\n                \"username\": \"userthree\"\n            },\n            \"approved\": true\n        },\n        {\n            \"id\": 7,\n            \"comment\": null,\n            \"rating\": 2,\n            \"product\": {\n                \"id\": 2,\n                \"name\": \"Product Two\"\n            },\n            \"user\": {\n                \"id\": 7,\n                \"username\": \"userseven\"\n            },\n            \"approved\": true\n        },\n        {\n            \"id\": 6,\n            \"comment\": null,\n            \"rating\": 4,\n            \"product\": {\n                \"id\": 2,\n                \"name\": \"Product Two\"\n            },\n            \"user\": {\n                \"id\": 6,\n                \"username\": \"usersix\"\n            },\n            \"approved\": true\n        },\n        {\n            \"id\": 5,\n            \"comment\": \"Could be better, but worth the price.\",\n            \"rating\": 2,\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Product One\"\n            },\n            \"user\": {\n                \"id\": 5,\n                \"username\": \"userfive\"\n            },\n            \"approved\": true\n        },\n        {\n            \"id\": 4,\n            \"comment\": \"Not what I expected, but okay\",\n            \"rating\": 3,\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Product One\"\n            },\n            \"user\": {\n                \"id\": 4,\n                \"username\": \"userfour\"\n            },\n            \"approved\": true\n        },\n        {\n            \"id\": 3,\n            \"comment\": \"Great product, highly recommended!\",\n            \"rating\": 4,\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Product One\"\n            },\n            \"user\": {\n                \"id\": 3,\n                \"username\": \"userthree\"\n            },\n            \"approved\": true\n        },\n        {\n            \"id\": 2,\n            \"comment\": \"Loved it, will definitely buy again!\",\n            \"rating\": 5,\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Product One\"\n            },\n            \"user\": {\n                \"id\": 2,\n                \"username\": \"usertwo\"\n            },\n            \"approved\": true\n        },\n        {\n            \"id\": 1,\n            \"comment\": \"Fantastic quality at a great price.\",\n            \"rating\": 5,\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Product One\"\n            },\n            \"user\": {\n                \"id\": 1,\n                \"username\": \"userone\"\n            },\n            \"approved\": true\n        }\n    ],\n    \"pageable\": {\n        \"pageNumber\": 0,\n        \"pageSize\": 20,\n        \"sort\": {\n            \"empty\": true,\n            \"sorted\": false,\n            \"unsorted\": true\n        },\n        \"offset\": 0,\n        \"paged\": true,\n        \"unpaged\": false\n    },\n    \"last\": true,\n    \"totalPages\": 1,\n    \"totalElements\": 8,\n    \"size\": 20,\n    \"number\": 0,\n    \"sort\": {\n        \"empty\": true,\n        \"sorted\": false,\n        \"unsorted\": true\n    },\n    \"first\": true,\n    \"numberOfElements\": 8,\n    \"empty\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8383/review/:reviewId",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"review",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "resposne",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8383/review/:reviewId",
+									"host": [
+										"localhost"
+									],
+									"port": "8383",
+									"path": [
+										"review",
+										":reviewId"
+									],
+									"variable": [
+										{
+											"key": "reviewId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Dec 2023 14:26:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"comment\": \"Fantastic quality at a great price.\",\n    \"rating\": 5,\n    \"product\": {\n        \"id\": 1,\n        \"name\": \"Product One\"\n    },\n    \"user\": {\n        \"id\": 1,\n        \"username\": \"userone\"\n    },\n    \"approved\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "approve review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8383/review/:reviewId/approve",
+							"host": [
+								"localhost"
+							],
+							"port": "8383",
+							"path": [
+								"review",
+								":reviewId",
+								"approve"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8383/review/:reviewId/approve",
+									"host": [
+										"localhost"
+									],
+									"port": "8383",
+									"path": [
+										"review",
+										":reviewId",
+										"approve"
+									],
+									"variable": [
+										{
+											"key": "reviewId",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 28 Dec 2023 14:26:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	]
+}
