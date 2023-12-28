@@ -30,33 +30,59 @@ public class Product extends BaseEntity{
     @OneToMany(mappedBy = "product")
     private List<Review> reviews;
 
-    @Column()
-
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Provider getProvider() {
         return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 
     public boolean isRatingEnabled() {
         return isRatingEnabled;
     }
 
+    public void setRatingEnabled(boolean ratingEnabled) {
+        isRatingEnabled = ratingEnabled;
+    }
+
     public boolean isCommentingEnabled() {
         return isCommentingEnabled;
+    }
+
+    public void setCommentingEnabled(boolean commentingEnabled) {
+        isCommentingEnabled = commentingEnabled;
     }
 
     public boolean isOnlyBuyersCanReview() {
         return onlyBuyersCanReview;
     }
 
+    public void setOnlyBuyersCanReview(boolean onlyBuyersCanReview) {
+        this.onlyBuyersCanReview = onlyBuyersCanReview;
+    }
+
     public List<Review> getReviews() {
         return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
