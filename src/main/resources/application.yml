@@ -5,7 +5,7 @@ spring:
   application:
     name: fictional-dollop
   datasource:
-    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_DATABASE:fictional_dollop}?allowPublicKeyRetrieval=true&autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&useLegacyDatetimeCode=false
+    url: jdbc:mysql://${DB_HOST:127.0.0.1}:${DB_PORT:3306}/${DB_DATABASE:fictional_dollop}?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&useLegacyDatetimeCode=false
     username: ${DB_USER:root}
     password: ${DB_PASS:123@abcd}
     driver-class-name: com.mysql.cj.jdbc.Driver

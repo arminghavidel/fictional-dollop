@@ -9,6 +9,7 @@ import com.github.fictionaldollop.domain.User;
 import com.github.fictionaldollop.repository.ProductRepository;
 import com.github.fictionaldollop.service.exception.FictionalBadRequestException;
 import com.github.fictionaldollop.service.exception.FictionalNotFoundException;
+import com.github.fictionaldollop.service.exception.FictionalUnAuthorizedException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -60,8 +61,8 @@ public class ProductService {
         if (!product.isCommentingEnabled() && request.getComment() != null)
             throw new FictionalBadRequestException("Commenting is not allowed for this product!");
 
-        if (product.isOnlyBuyersCanReview() && !product.getBuyers().contains(user))
-            throw new FictionalBadRequestException("Review not allowed for this user!");
+        if (product.isOnlyBuyersCanReview() && !productRepository.isUserABuyer(product, user))
+            throw new FictionalUnAuthorizedException("Review not allowed for this user!");
     }
 
     public void updateProductRating(Review review) {
